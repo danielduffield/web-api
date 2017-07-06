@@ -3,15 +3,15 @@ const jsonParser = bodyParser.json()
 const express = require('express')
 const app = express()
 
+let noteCount = 1
 const notes = []
 
 app.use(jsonParser)
 
 app.post('/notes/', (req, res) => {
+  req.body.id = noteCount
+  noteCount++
   notes.push(req.body)
-  notes.forEach((note, index) => {
-    note.id = index + 1
-  })
   res.sendStatus(201)
 })
 
