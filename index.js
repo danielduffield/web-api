@@ -8,6 +8,10 @@ const notes = []
 
 app.use(jsonParser)
 
+app.get('/notes/', (req, res) => {
+  res.send(notes)
+})
+
 app.post('/notes/', (req, res) => {
   req.body.id = noteCount
   noteCount++
