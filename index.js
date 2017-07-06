@@ -10,7 +10,7 @@ app.use(jsonParser)
 app.post('/notes/', (req, res) => {
   notes.push(req.body)
   notes.forEach((note, index) => {
-    note.id = index
+    note.id = index + 1
   })
   res.sendStatus(201)
 })
