@@ -10,11 +10,10 @@ app.use(jsonParser)
 
 app.put('/notes/:id', (req, res) => {
   const noteId = parseInt(req.params.id, 10)
-  if (req.body.content) {
-    notes[noteId - 1].content = req.body.content
-  }
-  if (req.body.title) {
-    notes[noteId - 1].title = req.body.title
+  for (const key in req.body) {
+    if (key === 'title' || key === 'content') {
+      notes[noteId - 1][key] = req.body[key]
+    }
   }
   req.body.content || req.body.title ? res.sendStatus(200) : res.sendStatus(404)
 })
