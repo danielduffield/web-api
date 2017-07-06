@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
-const putValidator = require('./putValidator')
+const noteValidator = require('./noteValidator')
 const express = require('express')
 const app = express()
 
@@ -9,12 +9,12 @@ const notes = []
 
 app.use(jsonParser)
 
-app.put('/notes/:id', putValidator)
+app.post('/notes/', noteValidator)
+app.put('/notes/:id', noteValidator)
 
 app.put('/notes/:id', (req, res) => {
   const noteId = parseInt(req.params.id, 10)
   const note = notes.find(note => note.id === noteId)
-  if (!req.body) return res.sendStatus(404)
   Object.assign(note, req.body)
   res.sendStatus(200)
 })
