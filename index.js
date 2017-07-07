@@ -8,6 +8,13 @@ const notes = []
 
 app.use(jsonParser)
 
+app.put('/notes/:id', (req, res) => {
+  const noteId = parseInt(req.params.id, 10)
+  const note = notes.find(note => note.id === noteId)
+  Object.assign(note, req.body)
+  res.sendStatus(200)
+})
+
 app.get('/notes/', (req, res) => {
   res.send(notes)
 })
